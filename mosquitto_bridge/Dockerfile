@@ -5,6 +5,7 @@ ENV LANG C.UTF-8
 
 # Setup base
 RUN apk add --no-cache tzdata jq mosquitto
+RUN apk add nano
 
 # Copy data
 COPY run.sh /
