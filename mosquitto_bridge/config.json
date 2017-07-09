@@ -33,5 +33,4 @@
 	    {"connection": "str", "address": "str", "remote_username": "str", "remote_password": "str", "clientid": "str", "try_private": "str", "start_type": "str", "topic": "str"}
 	]
   },
-  "image": "homeassistant/{arch}-addon-mosquitto"
 }
