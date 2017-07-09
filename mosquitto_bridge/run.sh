@@ -61,11 +61,11 @@ if [ "$BRIDGES" -gt "0" ]; then
 		touch /data/debug2
         CONNECTION=$(jq --raw-output ".bridges[$i].connection" $CONFIG_PATH)
         ADDRESS=$(jq --raw-output ".bridges[$i].address" $CONFIG_PATH)
-		USERNAME=$(jq --raw-output ".bridges[$i].username" $CONFIG_PATH)
-		PASSWORD=$(jq --raw-output ".bridges[$i].password" $CONFIG_PATH)
+		USERNAME=$(jq --raw-output ".bridges[$i].remote_username" $CONFIG_PATH)
+		PASSWORD=$(jq --raw-output ".bridges[$i].remote_password" $CONFIG_PATH)
 		CLIENTID=$(jq --raw-output ".bridges[$i].clientid" $CONFIG_PATH)
-		PRIVATE=$(jq --raw-output ".bridges[$i].private" $CONFIG_PATH)
-		TYPE=$(jq --raw-output ".bridges[$i].type" $CONFIG_PATH)
+		PRIVATE=$(jq --raw-output ".bridges[$i].try_private" $CONFIG_PATH)
+		TYPE=$(jq --raw-output ".bridges[$i].start_type" $CONFIG_PATH)
 		TOPIC=$(jq --raw-output ".bridges[$i].topic" $CONFIG_PATH)
 
 		rm -f /data/"$CONNECTION".conf || true
@@ -76,8 +76,8 @@ if [ "$BRIDGES" -gt "0" ]; then
 		echo "remote_username $USERNAME" >> /data/"$CONNECTION".conf
 		echo "remote_password $PASSWORD" >> /data/"$CONNECTION".conf
 		echo "clientid $CLIENTID" >> /data/"$CONNECTION".conf
-		#echo "try_private $PRIVATE" >> /data/"$CONNECTION".conf
-		#echo "start_type $TYPE" >> /data/"$CONNECTION".conf
+		echo "try_private $PRIVATE" >> /data/"$CONNECTION".conf
+		echo "start_type $TYPE" >> /data/"$CONNECTION".conf
 		echo "topic $TOPIC" >> /data/"$CONNECTION".conf
 		touch /data/debug4
     done
