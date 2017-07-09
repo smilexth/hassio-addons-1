@@ -76,8 +76,8 @@ if [ "$BRIDGES" -gt "0" ]; then
 		echo "remote_username $USERNAME" >> /data/"$CONNECTION".conf
 		echo "remote_password $PASSWORD" >> /data/"$CONNECTION".conf
 		echo "clientid $CLIENTID" >> /data/"$CONNECTION".conf
-		echo "try_private $PRIVATE" >> /data/"$CONNECTION".conf
-		echo "start_type $TYPE" >> /data/"$CONNECTION".conf
+		#echo "try_private $PRIVATE" >> /data/"$CONNECTION".conf
+		#echo "start_type $TYPE" >> /data/"$CONNECTION".conf
 		echo "topic $TOPIC" >> /data/"$CONNECTION".conf
 		touch /data/debug4
     done
