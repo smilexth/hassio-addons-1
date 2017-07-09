@@ -54,10 +54,10 @@ fi
 # Load external config files
 if [ "$BRIDGES" -gt "0" ]; then
     sed -i "s/#include_dir/include_dir/g" /etc/mosquitto.conf
-	rm -r /data/bridges || true
-	mkdir /data/bridges
+	touch /data/debug1
 	
 	for (( i=0; i < "$BRIDGES"; i++ )); do
+		touch /data/debug2
         CONNECTION=$(jq --raw-output ".bridges[$i].connection" $CONFIG_PATH)
         ADDRESS=$(jq --raw-output ".bridges[$i].address" $CONFIG_PATH)
 		USERNAME=$(jq --raw-output ".bridges[$i].username" $CONFIG_PATH)
@@ -67,15 +67,18 @@ if [ "$BRIDGES" -gt "0" ]; then
 		TYPE=$(jq --raw-output ".bridges[$i].type" $CONFIG_PATH)
 		TOPIC=$(jq --raw-output ".bridges[$i].topic" $CONFIG_PATH)
 
-        touch /data/bridges/"$CONNECTION".conf
-		echo "connection $CONNECTION" >> /data/bridges/"$CONNECTION".conf
-		echo "address $ADDRESS" >> /data/bridges/"$CONNECTION".conf
-		echo "remote_username $USERNAME" >> /data/bridges/"$CONNECTION".conf
-		echo "remote_password $PASSWORD" >> /data/bridges/"$CONNECTION".conf
-		echo "clientid $CLIENTID" >> /data/bridges/"$CONNECTION".conf
-		echo "try_private $PRIVATE" >> /data/bridges/"$CONNECTION".conf
-		echo "start_type $TYPE" >> /data/bridges/"$CONNECTION".conf
-		echo "topic $TOPIC" >> /data/bridges/"$CONNECTION".conf
+		rm -f /data/"$CONNECTION".conf || true
+        touch /data/"$CONNECTION".conf
+		touch /data/debug3
+		echo "connection $CONNECTION" >> /data/"$CONNECTION".conf
+		echo "address $ADDRESS" >> /data/"$CONNECTION".conf
+		echo "remote_username $USERNAME" >> /data/"$CONNECTION".conf
+		echo "remote_password $PASSWORD" >> /data/"$CONNECTION".conf
+		echo "clientid $CLIENTID" >> /data/"$CONNECTION".conf
+		echo "try_private $PRIVATE" >> /data/"$CONNECTION".conf
+		echo "start_type $TYPE" >> /data/"$CONNECTION".conf
+		echo "topic $TOPIC" >> /data/"$CONNECTION".conf
+		touch /data/debug4
     done
 fi
 
