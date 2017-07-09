@@ -51,6 +51,7 @@ if [ "$LOGINS" -gt "0" ]; then
     done
 fi
 
+touch /data/debug0
 # Load external config files
 if [ "$BRIDGES" -gt "0" ]; then
     sed -i "s/#include_dir/include_dir/g" /etc/mosquitto.conf
@@ -81,6 +82,7 @@ if [ "$BRIDGES" -gt "0" ]; then
 		touch /data/debug4
     done
 fi
+touch /data/debug_end
 
 # start server
 exec mosquitto -c /etc/mosquitto.conf < /dev/null
